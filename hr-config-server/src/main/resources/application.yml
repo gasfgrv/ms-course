@@ -8,7 +8,17 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/gustosilva/ms-course-config
+          ignore-local-ssh-settings: true
+          host-key-algorithm: ${HOST_KEY_ALGORITHM} 
+          host-key: ${HOST_KEY}
+          uri: ${GITHUB_URI}
           username: ${GITHUB_USER}
           password: ${GITHUB_PASS}
-          default-label: main
+          default-label: ${GITHUB_BRANCH}
+          private-key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            Proc-Type: 4,ENCRYPTED
+            DEK-Info: AES-128-CBC,927CDC6E923705AE72BF68C372DC14BD
+            
+            ${PRIVATE_KEY_CONTENT}
+            -----END RSA PRIVATE KEY-----
