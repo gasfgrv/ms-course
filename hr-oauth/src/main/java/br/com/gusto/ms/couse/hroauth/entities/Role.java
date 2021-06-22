@@ -2,9 +2,7 @@ package br.com.gusto.ms.couse.hroauth.entities;
 
 import java.io.Serializable;
 
-import org.springframework.security.core.GrantedAuthority;
-
-public class Role implements GrantedAuthority, Serializable {
+public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,6 +23,14 @@ public class Role implements GrantedAuthority, Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	@Override
@@ -56,11 +62,6 @@ public class Role implements GrantedAuthority, Serializable {
 		} else if (!roleName.equals(other.roleName))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String getAuthority() {
-		return this.roleName;
 	}
 
 }

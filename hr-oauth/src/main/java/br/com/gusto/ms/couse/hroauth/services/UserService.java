@@ -34,11 +34,13 @@ public class UserService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		try {
-			return client.findByEmail(username).getBody();
-		} catch (UsernameNotFoundException e) {
-			throw new UsernameNotFoundException("Username not found");
+		User user = client.findByEmail(username).getBody();
+		if (user == null) {
+			logger.error("Email not found {}", username);
+			throw new UsernameNotFoundException("Email not found");
 		}
+		System.out.println(user.getAuthorities().toString());
+		return user;
 	}
 
 }

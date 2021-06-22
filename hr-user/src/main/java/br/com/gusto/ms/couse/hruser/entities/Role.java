@@ -34,6 +34,14 @@ public class Role implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
 	@Override
 	public int hashCode() {
