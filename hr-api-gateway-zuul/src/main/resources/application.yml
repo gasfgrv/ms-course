@@ -21,6 +21,9 @@ zuul:
     payroll:
       service-id: hr-payroll 
       path: /hr-payroll/**
+    oauth:
+      service-id: hr-oauth 
+      path: /hr-oauth/**
       
 hystrix:
   command:
