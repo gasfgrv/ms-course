@@ -1,6 +1,7 @@
 package br.com.gusto.ms.course.hrworker.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,40 +55,22 @@ public class Worker implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dailyIncome == null) ? 0 : dailyIncome.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Worker worker = (Worker) o;
+
+		if (!Objects.equals(id, worker.id)) return false;
+		if (!Objects.equals(name, worker.name)) return false;
+		return Objects.equals(dailyIncome, worker.dailyIncome);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Worker other = (Worker) obj;
-		if (dailyIncome == null) {
-			if (other.dailyIncome != null)
-				return false;
-		} else if (!dailyIncome.equals(other.dailyIncome))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (dailyIncome != null ? dailyIncome.hashCode() : 0);
+		return result;
 	}
-
 }

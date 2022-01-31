@@ -1,6 +1,7 @@
 package br.com.gusto.ms.couse.hrapigatewayzuul.config;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -26,7 +27,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private static final String[] OPERATOR = { "/hr-worker/**" };
 	private static final String[] ADMIN = { "/hr-payroll/**", "/hr-user/**", "/actuator/**", "/hr-worker/actuator/**", "/hr-oauth/actuator/**" };
 	
-	private JwtTokenStore tokenStore;
+	private final JwtTokenStore tokenStore;
 	
 	@Autowired
 	public ResourceServerConfig(JwtTokenStore tokenStore) {
@@ -52,7 +53,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOrigins(Arrays.asList("*"));
+		corsConfig.setAllowedOrigins(List.of("*"));
 		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
 		corsConfig.setAllowCredentials(true);
 		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); 

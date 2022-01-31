@@ -24,11 +24,11 @@ public class UserResource {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id) {
-		return ResponseEntity.ok(repository.findById(id).get());
+		return ResponseEntity.ok(repository.findById(id).orElseThrow(RuntimeException::new));
 	}
 	
 	@GetMapping("/search")
 	public ResponseEntity<User> findByEmail(@RequestParam String email) {
-		return ResponseEntity.ok(repository.findByEmail(email).get());
+		return ResponseEntity.ok(repository.findByEmail(email).orElseThrow(RuntimeException::new));
 	}
 }

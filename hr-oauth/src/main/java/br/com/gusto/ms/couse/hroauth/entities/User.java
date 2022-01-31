@@ -1,14 +1,14 @@
 package br.com.gusto.ms.couse.hroauth.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class User implements UserDetails, Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +18,7 @@ public class User implements UserDetails, Serializable {
 	private String email;
 	private String password;
 
-	private Set<Role> roles = new HashSet<>();
+	private final Set<Role> roles = new HashSet<>();
 
 	public User() {
 	}
@@ -68,28 +68,21 @@ public class User implements UserDetails, Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		User user = (User) o;
+
+		if (!id.equals(user.id)) return false;
+		return email.equals(user.email);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public int hashCode() {
+		int result = id.hashCode();
+		result = 31 * result + email.hashCode();
+		return result;
 	}
 
 	@Override
@@ -99,7 +92,7 @@ public class User implements UserDetails, Serializable {
 
 	@Override
 	public String getUsername() {
-		return email;
+		return getEmail();
 	}
 
 	@Override

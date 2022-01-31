@@ -14,7 +14,7 @@ import br.com.gusto.ms.couse.hroauth.feignclients.UserFeignClient;
 @Service
 public class UserService implements UserDetailsService{
 
-	private static Logger logger = LoggerFactory.getLogger(UserService.class.getSimpleName());
+	private static final Logger logger = LoggerFactory.getLogger(UserService.class.getSimpleName());
 	
 	private final UserFeignClient client;
 
@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService{
 			logger.error("Email not found {}", username);
 			throw new UsernameNotFoundException("Email not found");
 		}
-		System.out.println(user.getAuthorities().toString());
+		logger.info(user.getAuthorities().toString());
 		return user;
 	}
 
